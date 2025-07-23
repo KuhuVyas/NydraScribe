@@ -63,3 +63,17 @@ def basic_heuristic_filter(spans: List[Span], median_size: float) -> List[Span]:
         if (large_enough or looks_like_hdr) and near_top:
             candidates.append(sp)
     return candidates
+
+def build_feature_matrix(spans: List[Span], median_size: float):
+    """Transform Span list into ∣spans∣×8 feature numpy array."""
+    feats = np.zeros((len(spans), 8), dtype=np.float32)
+    for i, sp in enumerate(spans):
+        feats[i, 0] = sp.font_size / median_size
+        feats[i, 1] = 1.0 if sp.bold else 0.0
+        feats[i, 2] = sp.y0 / 800  # normalised Y
+        feats[i, 3] = sp.x0 / 600  # normalised X
+        feats[i, 4] = len(sp.text.split())        # token count
+        feats[i, 5] = 1.0 if sp.text.isupper() else 0.0
+        feats[i, 6] = 1.0 if re.match(r"^[\\dIVXLCDM]", sp.text) else 0.0
+        feats[i, 7] = 0.0                         # placeholder OCR conf
+    return feats
