@@ -99,4 +99,8 @@ def process_pdf(pdf_path: Path, clf: DecisionTreeClassifier, schema):
             X = build_feature_matrix(cand_spans, median_size)
             preds = clf.predict(X)
 
+            for sp, lbl in zip(cand_spans, preds):
+                lvl_tag = label_to_level(lbl)
+                if lvl_tag in {"H1", "H2", "H3", "H4"}:
+                    outline.append({"level": lvl_tag, "text": sp.text, "page": sp.page_num})
 
