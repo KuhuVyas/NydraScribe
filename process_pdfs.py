@@ -95,3 +95,8 @@ def process_pdf(pdf_path: Path, clf: DecisionTreeClassifier, schema):
             spans = extract_spans(page, pn)
             if not spans:
                 continue
+
+            X = build_feature_matrix(cand_spans, median_size)
+            preds = clf.predict(X)
+
+
