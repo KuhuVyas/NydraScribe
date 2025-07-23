@@ -77,3 +77,7 @@ def build_feature_matrix(spans: List[Span], median_size: float):
         feats[i, 6] = 1.0 if re.match(r"^[\\dIVXLCDM]", sp.text) else 0.0
         feats[i, 7] = 0.0                         # placeholder OCR conf
     return feats
+
+def label_to_level(lbl: int) -> str:
+    mapping = {0: "BODY", 1: "H4", 2: "H3", 3: "H2", 4: "H1", 5: "TITLE"}
+    return mapping.get(lbl, "BODY")
