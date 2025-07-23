@@ -50,3 +50,16 @@ def extract_spans(page: fitz.Page, page_num: int) -> List[Span]:
                     )
                 )
     return spans
+
+def basic_heuristic_filter(spans: List[Span], median_size: float) -> List[Span]:
+    """Fast rule-of-thumb: keep spans that COULD be headings."""
+    candidates = []
+    for sp in spans:
+        if len(sp.text) < 2:
+            continue
+        large_enough = sp.font_size >= 0.9 * median_size
+        looks_like_hdr = header_regex().match(sp.text.upper())
+        near_top = sp.y0 < 200    # <≈ 5 cm from top of page
+        if (large_enough or looks_like_hdr) and near_top:
+            candidates.append(sp)
+    return candidates
