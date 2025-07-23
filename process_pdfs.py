@@ -22,3 +22,14 @@ class Span:
     x0: float
     y0: float
     page_num: int
+
+def load_schema():
+    return json.loads(SCHEMA_PATH.read_text())
+
+
+def header_regex():
+    """Pre-compile simple numbering / all-caps patterns."""
+    return re.compile(
+        r"^(\d+(\.\d+)*|[IVXLCDM]+\.)?\\s*[A-Z0-9].{0,80}$"
+    )
+
