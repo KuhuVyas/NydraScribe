@@ -1,9 +1,7 @@
 pymupdf>=1.23
-scikit-learn==1.4.2
-numpy~=1.26
-rapidfuzz~=3.7              # fast fuzzy-match for de-duplication
-joblib~=1.4                 # model persistence
-jsonschema~=4.22            # runtime output validation
-tqdm~=4.66                  # pretty progress bars
-# Uncomment if/when you add MiniLM embeddings
-# sentence-transformers==3.2
+numpy>=1.23,<2.4
+scikit-learn>=1.2,<1.5
+joblib
+jsonschema
+tqdm
+rapidfuzz

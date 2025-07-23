@@ -25,8 +25,9 @@ def extract_spans(page: fitz.Page, page_num: int) -> List[Span]:
     page_width = page.rect.width
 
     for block in blocks:
-        if block[" 0"]:
+        if block["type"] != 0:
             continue
+
         for line in block["lines"]:
             for s in line["spans"]:
                 txt = s["text"].strip()
