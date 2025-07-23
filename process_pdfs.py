@@ -90,3 +90,8 @@ def process_pdf(pdf_path: Path, clf: DecisionTreeClassifier, schema):
         spans = extract_spans(page, pn)
         if not spans:
             continue
+
+        for pn, page in enumerate(doc, start=1):
+            spans = extract_spans(page, pn)
+            if not spans:
+                continue
