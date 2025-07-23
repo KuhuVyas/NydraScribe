@@ -28,8 +28,25 @@ def load_schema():
 
 
 def header_regex():
-    """Pre-compile simple numbering / all-caps patterns."""
     return re.compile(
         r"^(\d+(\.\d+)*|[IVXLCDM]+\.)?\\s*[A-Z0-9].{0,80}$"
     )
 
+def extract_spans(page: fitz.Page, page_num: int) -> List[Span]:
+    spans = []
+    for block in page.get_text("dict")["blocks"]:
+        if block["type"] != 0:
+            continue
+        for line in block["lines"]:
+            for s in line["spans"]:
+                spans.append(
+                    Span(
+                        text=s["text"].strip(),
+                        font_size=s["size"],
+                        bold=bool("Bold" in s["font"]),
+                        x0=s["bbox"][0],
+                        y0=s["bbox"][1],
+                        page_num=page_num,
+                    )
+                )
+    return spans
