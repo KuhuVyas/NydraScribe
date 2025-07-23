@@ -14,4 +14,11 @@ from tqdm import tqdm
 SCHEMA_PATH = Path(__file__).resolve().parent / "schema" / "output_schema.json"
 MODEL_PATH  = Path(__file__).resolve().parent / "assets" / "heading_dt.pkl"
 
-
+@dataclass
+class Span:
+    text: str
+    font_size: float
+    bold: bool
+    x0: float
+    y0: float
+    page_num: int
