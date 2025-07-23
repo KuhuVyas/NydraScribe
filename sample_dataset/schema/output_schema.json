@@ -2,163 +2,24 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
   "properties": {
-    "title": {
-      "type": "string"
-    },
+    "title": { "type": "string" },
     "outline": {
       "type": "array",
-      "items": [
-        {
-          "type": "object",
-          "properties": {
-            "level": {
-              "type": "string"
-            },
-            "text": {
-              "type": "string"
-            },
-            "page": {
-              "type": "integer"
-            }
+      "items": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "type": "string",
+            "enum": ["H1", "H2", "H3", "H4"]
           },
-          "required": ["level", "text", "page"]
+          "text": { "type": "string" },
+          "page": {
+            "type": "integer",
+            "minimum": 1
+          }
         },
-        {
-          "type": "object",
-          "properties": {
-            "level": {
-              "type": "string"
-            },
-            "text": {
-              "type": "string"
-            },
-            "page": {
-              "type": "integer"
-            }
-          },
-          "required": ["level", "text", "page"]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "level": {
-              "type": "string"
-            },
-            "text": {
-              "type": "string"
-            },
-            "page": {
-              "type": "integer"
-            }
-          },
-          "required": ["level", "text", "page"]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "level": {
-              "type": "string"
-            },
-            "text": {
-              "type": "string"
-            },
-            "page": {
-              "type": "integer"
-            }
-          },
-          "required": ["level", "text", "page"]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "level": {
-              "type": "string"
-            },
-            "text": {
-              "type": "string"
-            },
-            "page": {
-              "type": "integer"
-            }
-          },
-          "required": ["level", "text", "page"]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "level": {
-              "type": "string"
-            },
-            "text": {
-              "type": "string"
-            },
-            "page": {
-              "type": "integer"
-            }
-          },
-          "required": ["level", "text", "page"]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "level": {
-              "type": "string"
-            },
-            "text": {
-              "type": "string"
-            },
-            "page": {
-              "type": "integer"
-            }
-          },
-          "required": ["level", "text", "page"]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "level": {
-              "type": "string"
-            },
-            "text": {
-              "type": "string"
-            },
-            "page": {
-              "type": "integer"
-            }
-          },
-          "required": ["level", "text", "page"]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "level": {
-              "type": "string"
-            },
-            "text": {
-              "type": "string"
-            },
-            "page": {
-              "type": "integer"
-            }
-          },
-          "required": ["level", "text", "page"]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "level": {
-              "type": "string"
-            },
-            "text": {
-              "type": "string"
-            },
-            "page": {
-              "type": "integer"
-            }
-          },
-          "required": ["level", "text", "page"]
-        }
-      ]
+        "required": ["level", "text", "page"]
+      }
     }
   },
   "required": ["title", "outline"]
