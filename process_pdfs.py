@@ -11,6 +11,7 @@ import joblib
 from jsonschema import validate, ValidationError
 from tqdm import tqdm
 
-
+SCHEMA_PATH = Path(__file__).resolve().parent / "schema" / "output_schema.json"
+MODEL_PATH  = Path(__file__).resolve().parent / "assets" / "heading_dt.pkl"
 
 
