@@ -134,6 +134,8 @@ def main():
             out_path.write_text(json.dumps(data, indent=2, ensure_ascii=False))
 
     print("Done!")
+if __name__ == "__main__":
+    main()
 
 
 
