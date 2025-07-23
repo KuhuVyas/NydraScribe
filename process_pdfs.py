@@ -81,3 +81,8 @@ def build_feature_matrix(spans: List[Span], median_size: float):
 def label_to_level(lbl: int) -> str:
     mapping = {0: "BODY", 1: "H4", 2: "H3", 3: "H2", 4: "H1", 5: "TITLE"}
     return mapping.get(lbl, "BODY")
+
+def process_pdf(pdf_path: Path, clf: DecisionTreeClassifier, schema):
+    doc = fitz.open(pdf_path)
+    outline = []
+    title = ""
