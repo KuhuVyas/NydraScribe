@@ -127,6 +127,13 @@ def main():
     if not pdfs:
         print("No PDFs found in /app/input", file=sys.stderr)
         sys.exit(1)
+    for pdf_path in tqdm(pdfs, desc="Processing PDFs"):
+        data = process_pdf(pdf_path, clf, schema)
+        if data:
+            out_path = output_dir / (pdf_path.stem + ".json")
+            out_path.write_text(json.dumps(data, indent=2, ensure_ascii=False))
+
+    print("Done!")
 
 
 
