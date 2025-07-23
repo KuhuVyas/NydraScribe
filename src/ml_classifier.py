@@ -84,3 +84,19 @@ class HeadingClassifier:
 
     def load(self, path: Path):
         self.model = joblib.load(path)
+
+    # Add to your ml_classifier.py
+    def predict_with_confidence_threshold(self, X, confidence_threshold=0.75):
+        """Filter predictions based on confidence scores"""
+        probabilities = self.model.predict_proba(X)
+        predictions = self.model.predict(X)
+
+        filtered_predictions = []
+        for i, (pred, proba) in enumerate(zip(predictions, probabilities)):
+            max_confidence = np.max(proba)
+            if max_confidence >= confidence_threshold:
+                filtered_predictions.append(pred)
+            else:
+                filtered_predictions.append(0)  # Default to BODY
+
+        return filtered_predictions
