@@ -90,22 +90,21 @@ def process_pdf(pdf_path: Path, clf: DecisionTreeClassifier, schema):
         spans = extract_spans(page, pn)
         if not spans:
             continue
+        median_size = np.median([sp.font_size for sp in spans])
+        cand_spans = basic_heuristic_filter(spans, median_size)
+        if not cand_spans:
+            continue
 
-        for pn, page in enumerate(doc, start=1):
-            spans = extract_spans(page, pn)
-            if not spans:
-                continue
-
-            X = build_feature_matrix(cand_spans, median_size)
-            preds = clf.predict(X)
-
-            for sp, lbl in zip(cand_spans, preds):
-                lvl_tag = label_to_level(lbl)
-                if lvl_tag in {"H1", "H2", "H3", "H4"}:
-                    outline.append({"level": lvl_tag, "text": sp.text, "page": sp.page_num})
-
-                elif lvl_tag == "TITLE" and not title:
-                    title = sp.text
+        X = build_feature_matrix(cand_spans, median_size)
+        preds = clf.predict(X)
+        for sp, lbl in zip(cand_spans, preds):
+            lvl_tag = label_to_level(lbl)
+            if lvl_tag in {"H1", "H2", "H3", "H4"}:
+                outline.append({"level": lvl_tag, "text": sp.text, "page": sp.page_num})
+            elif lvl_tag == "TITLE" and not title:
+                title = sp.text
+    if not title and outline:
+        title = outline[0]["text"]
 
 
 
