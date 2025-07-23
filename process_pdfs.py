@@ -104,3 +104,10 @@ def process_pdf(pdf_path: Path, clf: DecisionTreeClassifier, schema):
                 if lvl_tag in {"H1", "H2", "H3", "H4"}:
                     outline.append({"level": lvl_tag, "text": sp.text, "page": sp.page_num})
 
+                elif lvl_tag == "TITLE" and not title:
+                    title = sp.text
+
+
+
+
+
