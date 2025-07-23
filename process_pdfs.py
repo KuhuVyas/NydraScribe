@@ -123,6 +123,11 @@ def main():
     output_dir = Path("/NydraScribe/output")
     output_dir.mkdir(parents=True, exist_ok=True)
 
+    pdfs = sorted(p for p in input_dir.iterdir() if p.suffix.lower() == ".pdf")
+    if not pdfs:
+        print("No PDFs found in /app/input", file=sys.stderr)
+        sys.exit(1)
+
 
 
 
