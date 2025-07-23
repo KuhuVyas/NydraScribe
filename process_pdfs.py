@@ -115,6 +115,10 @@ def process_pdf(pdf_path: Path, clf: DecisionTreeClassifier, schema):
 
     return result
 
+def main():
+    schema = load_schema()
+    clf     = joblib.load(MODEL_PATH)
+
 
 
 
