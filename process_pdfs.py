@@ -119,6 +119,10 @@ def main():
     schema = load_schema()
     clf     = joblib.load(MODEL_PATH)
 
+    input_dir = Path("/NydraScribe/input")
+    output_dir = Path("/NydraScribe/output")
+    output_dir.mkdir(parents=True, exist_ok=True)
+
 
 
 
