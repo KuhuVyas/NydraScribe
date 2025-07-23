@@ -113,6 +113,7 @@ def process_pdf(pdf_path: Path, clf: DecisionTreeClassifier, schema):
         print(f"Schema validation failed for {pdf_path.name}: {err}", file=sys.stderr)
         return None
 
+    return result
 
 
 
