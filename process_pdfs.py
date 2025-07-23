@@ -106,6 +106,14 @@ def process_pdf(pdf_path: Path, clf: DecisionTreeClassifier, schema):
     if not title and outline:
         title = outline[0]["text"]
 
+    result = {"title": title, "outline": outline}
+    try:
+        validate(result, schema)
+    except ValidationError as err:
+        print(f"Schema validation failed for {pdf_path.name}: {err}", file=sys.stderr)
+        return None
+
+
 
 
 
